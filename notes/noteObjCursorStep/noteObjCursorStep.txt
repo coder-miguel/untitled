@@ -1,0 +1,41 @@
+// clear the start node
+map[selected.actor.gridX, selected.actor.gridY].occupant = noone;
+		
+// update actor location
+selected.actor.gridX = gridX;
+selected.actor.gridY = gridY;
+selected.actor.x = hoverNode.x;
+// Offset for actors with sprites taller than 32 pixels
+var actor_height = sprite_get_height(object_get_sprite(selected.actor.object_index));
+selected.actor.y = hoverNode.y - actor_height + GRID_SIZE;
+		
+// update destination node with actor
+hoverNode.occupant = selected.actor;
+		
+// if selected actor performed "double move" deselect
+// otherwise, decrement actions and reselect
+if(hoverNode.g > selected.actor.move){
+	selected.actor = noone;
+	wipe_nodes();
+}else{
+	selected.actor.actions -=1;
+	if(selected.actor.actions > 0){
+		// reperform movement range
+		movement_range(hoverNode, selected.actor.move, selected.actor.actions);
+	}else{
+		selected.actor = noone;
+		wipe_nodes();
+	}
+}
+if(mouse_check_button_pressed(mb_left)){
+	if(hoverNode.occupant != noone){
+		if(hoverNode.occupant != selected.actor){
+			selected.actor = hoverNode.occupant;
+			selected.actor.actions = 2;
+			movement_range(hoverNode, selected.actor.move, selected.actor.actions);
+		}
+	}else{
+		selected.actor = noone;
+		wipe_nodes();
+	}
+}
