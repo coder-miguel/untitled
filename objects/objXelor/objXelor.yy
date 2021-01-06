@@ -26,8 +26,8 @@
   "eventList": [],
   "properties": [],
   "overriddenProperties": [
-    {"propertyId":{"name":"name","path":"objects/objActor/objActor.yy",},"objectId":{"name":"objActor","path":"objects/objActor/objActor.yy",},"value":"\"Xelor\"","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
-    {"propertyId":{"name":"move","path":"objects/objActor/objActor.yy",},"objectId":{"name":"objActor","path":"objects/objActor/objActor.yy",},"value":"4","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"","path":"",},"objectId":{"name":"objActor","path":"objects/objActor/objActor.yy",},"value":"\"Xelor\"","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"","path":"",},"objectId":{"name":"objActor","path":"objects/objActor/objActor.yy",},"value":"4","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Objects",

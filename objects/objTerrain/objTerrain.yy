@@ -1,10 +1,16 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "sprNode",
+    "path": "sprites/sprNode/sprNode.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "objNode",
+    "path": "objects/objNode/objNode.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,

@@ -4,6 +4,7 @@
 function wipe_nodes(){
 	with(objNode){
 		moveNode = false;
+		attackNode = false;
 		g = 0;
 		parent = noone;
 		color = c_white;
@@ -56,7 +57,7 @@ function movement_range(start, move, actions){
 		ds_list_add(closed, current);
 		
 		// set through current neighbors
-		for(ii = 0; ii < ds_list_size(current.neighbors); ii++){
+		for(var ii = 0; ii < ds_list_size(current.neighbors); ii++){
 			// store current neighbor in neighbor variable
 			neighbor = ds_list_find_value(current.neighbors, ii);
 			
@@ -120,7 +121,7 @@ function movement_range(start, move, actions){
 	ds_priority_destroy(open);
 	
 	// color move nodes then destroy the closed list
-	for(ii = 0; ii < ds_list_size(closed); ii++){
+	for(var ii = 0; ii < ds_list_size(closed); ii++){
 		current = ds_list_find_value(closed, ii);
 		current.moveNode = true;
 		

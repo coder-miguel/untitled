@@ -1,4 +1,4 @@
-/// @description Single Step objNode Initialize
+/// @description Process State of Game
 
 
 switch (state){
@@ -8,18 +8,18 @@ switch (state){
 				tempTerrain = instance_position(x + 16, y + 16, objTerrain);
 				switch(tempTerrain.type){
 					case TER_WALL:
+					instance_change(objWall, false);
 					type = TER_WALL;
-					sprite_index = sprWall;
 					passable = false;
 					break;
 					case TER_HOLE:
+					instance_change(objHole, false);
 					type = TER_HOLE;
-					sprite_index = sprNode;
 					passable = false;
 					break;
 					case TER_RUBBLE:
+					instance_change(objRubble, false);
 					type = TER_RUBBLE;
-					sprite_index = sprRubble;
 					cost = 2;
 					break;
 				}
@@ -64,8 +64,26 @@ switch (state){
 			// TODO:
 			// --Replace 2-action system
 			turnActor.actions = 2;
-			game_cursor.selected.actor = turnActor;
-			movement_range(map[turnActor.gridX, turnActor.gridY], turnActor.move, turnActor.actions);
+			turnActor.canAct = true;
+			
+			// Pass off actions and cursor control ONLY if actor is BLUE_ARMY
+			// Or else set lash variable to true and set alarm
+			if(turnActor.army == BLUE_ARMY){
+				game_cursor.selected.actor = turnActor;
+				movement_range(map[turnActor.gridX, turnActor.gridY], turnActor.move, turnActor.actions);
+				
+				switch(turnActor.atkType){
+					case ATTACK_TYPE_RANGED:
+						attack_range_ranged(turnActor);
+						break;
+					case ATTACK_TYPE_MELEE:
+						attack_range_melee(turnActor);
+						break;
+				}
+			}else{
+				turnActor.flash = true;
+				turnActor.alarm[0] = 30;
+			}
 		}
 			
 		break;

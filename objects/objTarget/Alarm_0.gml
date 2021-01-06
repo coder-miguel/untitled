@@ -1,2 +1,4 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description End Turn
+flash = false;
+color = c_white;
+game.turnActor = noone;

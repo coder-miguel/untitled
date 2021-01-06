@@ -1,5 +1,4 @@
 {
-  "name": "tsSereneVillage",
   "spriteId": {
     "name": "sprSereneVillage",
     "path": "sprites/sprSereneVillage/sprSereneVillage.yy",
@@ -3598,6 +3597,7 @@
     "path": "folders/Tile Sets.yy",
   },
   "resourceVersion": "1.0",
+  "name": "tsSereneVillage",
   "tags": [],
   "resourceType": "GMTileSet",
 }

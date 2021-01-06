@@ -55,7 +55,7 @@ if(mouse_check_button_pressed(mb_left)){
 		hoverNode.occupant = selected.actor;
 		
 		// send selected actor on its way
-		selected.actor.state = ACTOR_BEGIN_PATH;
+		selected.actor.state = ACTOR_PATH_BEGIN;
 		
 		// TODO:
 		// --Replace the 2-action system
@@ -69,5 +69,21 @@ if(mouse_check_button_pressed(mb_left)){
 		selected.actor = noone;
 		
 		// --code end
+	}
+	
+	if(selected.actor != noone && hoverNode.attackNode){
+		selected.actor.canAct = false;
+		selected.actor.actions -= 1;
+		selected.actor.atkTarget = hoverNode.occupant;
+		selected.actor.atkTimer = 10;
+		selected.actor.state = ACTOR_ATTACK_BEGIN;
+		selected.actor = noone;
+		wipe_nodes();
+		//switch(selected.actor.atkType){
+		//	case ATTACK_TYPE_RANGED:
+		//		break;
+		//	case ATTACK_TYPE_MELEE:
+		//		break;
+		//}
 	}
 }

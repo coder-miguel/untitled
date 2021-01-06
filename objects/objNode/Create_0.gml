@@ -9,7 +9,9 @@
 // parent = noone
 // cost = 1
 // g = 0
+// ---------------------------------------------------
 // moveNode = false
-type = NODE_DEFAULT;
+// attackNode = false
 
+type = NODE_DEFAULT;
 neighbors = ds_list_create();

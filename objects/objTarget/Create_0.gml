@@ -1,6 +1,8 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description Enemy Actor
 
 // Inherit the parent event
 event_inherited();
 
+army = RED_ARMY;
+flash = false;
+color = c_white;
