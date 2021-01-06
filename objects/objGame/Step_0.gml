@@ -4,8 +4,8 @@
 switch (state){
 	case GAME_INITIALIZING:
 		with(objNode) {
-			if(instance_position(x + 16, y + 16, objTerrain)){
-				tempTerrain = instance_position(x + 16, y + 16, objTerrain);
+			if(instance_position(x + floor(GRID_SIZE / 2), y + floor(GRID_SIZE / 2), objTerrain)){
+				tempTerrain = instance_position(x + floor(GRID_SIZE / 2), y + floor(GRID_SIZE / 2), objTerrain);
 				switch(tempTerrain.type){
 					case TER_WALL:
 					instance_change(objWall, false);
@@ -27,8 +27,8 @@ switch (state){
 					instance_destroy();
 				}
 			}
-			if(instance_position(x + 16, y + 16, objActor)){
-				occupant = instance_position(x + 16, y + 16, objActor);
+			if(instance_position(x + floor(GRID_SIZE / 2), y + floor(GRID_SIZE / 2), objActor)){
+				occupant = instance_position(x + floor(GRID_SIZE / 2), y + floor(GRID_SIZE / 2), objActor);
 				occupant.gridX = gridX;
 				occupant.gridY = gridY;
 			}

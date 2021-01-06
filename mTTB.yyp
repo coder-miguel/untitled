@@ -5,6 +5,7 @@
     {"id":{"name":"objWall","path":"objects/objWall/objWall.yy",},"order":8,},
     {"id":{"name":"objRangedAttack","path":"objects/objRangedAttack/objRangedAttack.yy",},"order":14,},
     {"id":{"name":"objCode","path":"objects/objCode/objCode.yy",},"order":1,},
+    {"id":{"name":"sprPow","path":"sprites/sprPow/sprPow.yy",},"order":14,},
     {"id":{"name":"scrCalculateStats","path":"scripts/scrCalculateStats/scrCalculateStats.yy",},"order":1,},
     {"id":{"name":"sprWall","path":"sprites/sprWall/sprWall.yy",},"order":8,},
     {"id":{"name":"objTerrain","path":"objects/objTerrain/objTerrain.yy",},"order":7,},

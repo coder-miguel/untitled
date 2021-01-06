@@ -134,3 +134,53 @@ function movement_range(start, move, actions){
 	ds_list_destroy(closed);
 	
 }
+function actor_path_create(actor, node){
+	var current = node;
+		
+	// create priority queue
+	var path = ds_priority_create();
+		
+	// add current node to queue
+	ds_priority_add(path, current, current.g);
+		
+	// step through each node, parent to parent until done
+	while(current.parent != noone){
+		// add parent to node queue
+		ds_priority_add(path, current.parent, current.parent.g);
+		// next node
+		current = current.parent;
+	}
+	do{
+		// delete lowest priority node (closest to actor)
+		current = ds_priority_delete_min(path);
+			
+		// add current node's sprite coords to selected actor's path
+		path_add_point(actor.path, current.x, current.y, 100);
+			
+	}until(ds_priority_empty(path));
+		
+	// destroy priority queue
+	ds_priority_destroy(path);	
+}
+
+function actor_path_init(actor, endstate){
+	
+	var rawX = path_get_point_x(actor.path, path_get_number(actor.path) - 1);
+	var rawY = path_get_point_y(actor.path, path_get_number(actor.path) - 1);
+	var destination = map[floor(rawX / GRID_SIZE), floor(rawY / GRID_SIZE)];
+	var origin = map[actor.gridX, actor.gridY];
+	
+	// clear origin node of actor
+	origin.occupant = noone;
+	
+	// update selected actor's appropriate grid coordinates
+	actor.gridX = destination.gridX;
+	actor.gridY = destination.gridY;
+	
+	// update selected actor's future node
+	destination.occupant = actor;
+		
+	// mark actor to begin path
+	actor.state = ACTOR_PATH_BEGIN;
+	actor.pathEndState = endstate;
+}

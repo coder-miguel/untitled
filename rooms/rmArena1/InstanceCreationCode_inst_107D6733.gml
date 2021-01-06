@@ -35,3 +35,6 @@ wisMod = 1;
 //initiative = dexMod;
 //initRoll = 0;
 calc_stats(id);
+
+//skills
+ds_map_add(skills, "charge", 0);

@@ -14,6 +14,7 @@
 #macro ACTOR_ATTACK_BEGIN "begin attack"
 #macro ACTOR_ATTACKING "attack"
 #macro ACTOR_ATTACK_END "end attack"
+#macro ACTOR_READY "ready"
 //#macro ACTOR_ERROR "actor error"
 // Terrain Types
 #macro TER_WALL "wall"
@@ -35,6 +36,9 @@
 #macro DAMAGE_TYPE_PIERCING "piercing"
 #macro DAMAGE_TYPE_BLUNT "blunt"
 #macro DAMAGE_TYPE_SLASHING "slashing"
+
+// Timing
+#macro TIME_ATTACK 10
 
 // Notes:
 // Object Depth

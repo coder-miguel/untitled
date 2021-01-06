@@ -21,3 +21,6 @@ wisMod = 0;
 //initiative = dexMod;
 //initRoll = 0;
 calc_stats(id);
+
+//skills
+ds_map_add(skills, "sneak attack", 6);

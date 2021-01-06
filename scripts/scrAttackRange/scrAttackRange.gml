@@ -17,7 +17,14 @@ function attack_range_ranged(actor){
 }
 
 function attack_range_melee(actor){
-	var halfGrid = floor(GRID_SIZE / 2);
+	var armActions = actor.actions;
+	
+	if(ds_map_exists(actor.skills, "charge")){
+		var armRange = actor.move * actor.actions;
+	}else{
+		var armRange = actor.move;
+	}
+	
 	with(objActor){
 		if(army != actor.army){
 			var tempX = abs(gridX - actor.gridX);
@@ -26,6 +33,17 @@ function attack_range_melee(actor){
 			if(tempX <= 1 && tempY <= 1){
 				map[gridX, gridY].attackNode = true;
 				map[gridX, gridY].color = c_red;
+			}else{
+				if(armActions > 1){
+					var node = map[gridX, gridY];
+					for(var ii = 0; ii < ds_list_size(node.neighbors); ii++){
+						var neighbor = ds_list_find_value(node.neighbors, ii);
+						if(neighbor.g > 0 && neighbor.g <= armRange){
+							map[gridX, gridY].attackNode = true;
+							map[gridX, gridY].color = c_red;
+						}
+					}
+				}
 			}
 		}
 	}

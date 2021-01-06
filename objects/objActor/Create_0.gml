@@ -3,6 +3,7 @@ path = path_add();
 path_set_kind(path, 2); // 2 = linear, 1 = curved
 path_set_closed(path, false);
 pathSpeed = 8;
+pathEndState = ACTOR_IDLE;
 
 state = ACTOR_IDLE;
 army = BLUE_ARMY;
@@ -49,8 +50,12 @@ canAct = false;
 // initiative variables
 initiative = dexMod;
 // initRoll = 0; <-- do we need this? maybe
+
+//skills
+skills = ds_map_create();
+
 // --DnD Traits
 
-// Effect Variables
+// Effect Variables------------------------
 shake = 0;
 shakeMag = 0;

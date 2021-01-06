@@ -17,45 +17,8 @@ if(mouse_check_button_pressed(mb_left)){
 	if(selected.actor != noone && hoverNode.moveNode){
 		// noteObjCursorStep: 1, 29
 		// --code start
-		var current = hoverNode;
-		
-		// create priority queue
-		var path = ds_priority_create();
-		
-		// add current node to queue
-		ds_priority_add(path, current, current.g);
-		
-		// step through each node, parent to parent until done
-		while(current.parent != noone){
-			// add parent to node queue
-			ds_priority_add(path, current.parent, current.parent.g);
-			// next node
-			current = current.parent;
-		}
-		do{
-			// delete lowest priority node (closest to actor)
-			current = ds_priority_delete_min(path);
-			
-			// add current node's sprite coords to selected actor's path
-			path_add_point(selected.actor.path, current.x, current.y, 100);
-			
-		}until(ds_priority_empty(path));
-		
-		// destroy priority queue
-		ds_priority_destroy(path);
-		
-		// clear node of selected actor
-		map[selected.actor.gridX, selected.actor.gridY].occupant = noone;
-		
-		// update selected actor's appropriate grid coordinates
-		selected.actor.gridX = gridX;
-		selected.actor.gridY = gridY;
-		
-		// update selected actor's future node
-		hoverNode.occupant = selected.actor;
-		
-		// send selected actor on its way
-		selected.actor.state = ACTOR_PATH_BEGIN;
+		actor_path_create(selected.actor, hoverNode);
+		actor_path_init(selected.actor, ACTOR_IDLE);
 		
 		// TODO:
 		// --Replace the 2-action system
@@ -65,25 +28,48 @@ if(mouse_check_button_pressed(mb_left)){
 		}else{
 			selected.actor.actions -= 1;
 		}
-		wipe_nodes();
 		selected.actor = noone;
+		wipe_nodes();
 		
 		// --code end
 	}
 	
 	if(selected.actor != noone && hoverNode.attackNode){
 		selected.actor.canAct = false;
-		selected.actor.actions -= 1;
 		selected.actor.atkTarget = hoverNode.occupant;
-		selected.actor.atkTimer = 10;
-		selected.actor.state = ACTOR_ATTACK_BEGIN;
+		
+		
+		switch(selected.actor.atkType){
+			case ATTACK_TYPE_RANGED:
+				selected.actor.atkTimer = TIME_ATTACK;
+				selected.actor.state = ACTOR_ATTACK_BEGIN;
+				selected.actor.actions -= 1;
+				break;
+			case ATTACK_TYPE_MELEE:
+				var tempX = abs(hoverNode.gridX - selected.actor.gridX);
+				var tempY = abs(hoverNode.gridY - selected.actor.gridY);
+				if(tempX <= 1 && tempY <= 1){
+					selected.actor.atkTimer = TIME_ATTACK;
+					selected.actor.state = ACTOR_ATTACK_BEGIN;
+					selected.actor.actions -= 1;
+				}else{
+					var tempG = 127;
+					var targetNode = noone;
+					var currentNode;
+					for(var ii = 0; ii < ds_list_size(hoverNode.neighbors); ii++){
+						currentNode = ds_list_find_value(hoverNode.neighbors, ii);
+						if(currentNode.occupant == noone && currentNode.g > 0 && currentNode.g < tempG){
+							tempG = currentNode.g;
+							targetNode = currentNode;
+						}
+					}
+					actor_path_create(selected.actor, targetNode);
+					actor_path_init(selected.actor, ACTOR_ATTACK_BEGIN);
+					selected.actor.actions -= 2;
+				}
+				break;
+		}
 		selected.actor = noone;
 		wipe_nodes();
-		//switch(selected.actor.atkType){
-		//	case ATTACK_TYPE_RANGED:
-		//		break;
-		//	case ATTACK_TYPE_MELEE:
-		//		break;
-		//}
 	}
 }

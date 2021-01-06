@@ -17,6 +17,16 @@ switch(state){
 		// make an attack roll
 		var atkRoll = irandom_range(1, 20);
 		var atkStatus = ATTACK_MISS;
+		var sneakDmg = 0;
+		if(ds_map_exists(skills, "sneak attack")){
+			var tempNode = map[atkTarget.gridX, atkTarget.gridY];
+			for(var ii = 0; ii < ds_list_size(tempNode.neighbors); ii++){
+				var current = ds_list_find_value(tempNode.neighbors, ii);
+				if(current.occupant != noone && current.occupant.army != atkTarget.army){
+					sneakDmg = ds_map_find_value(skills, "sneak attack");
+				}
+			}
+		}
 				
 		if(atkRoll == 20){
 			atkStatus = ATTACK_CRIT;
@@ -27,10 +37,10 @@ switch(state){
 				atkStatus = ATTACK_MISS;
 			}
 		}
-		// make damage roll
+		// center of all damage rolls
 		var tempDamage = 0;
 		if(atkStatus != ATTACK_MISS){
-			tempDamage = irandom_range(1, dmgDie) + dmgBonus;
+			tempDamage = irandom_range(1, dmgDie) + dmgBonus + ceil(sneakDmg * (irandom_range(1, 100) / 100));
 			if(atkStatus == ATTACK_CRIT){
 				tempDamage += irandom_range(1, dmgDie) + dmgBonus;
 			}
