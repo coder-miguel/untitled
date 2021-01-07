@@ -30,6 +30,8 @@
   },
   "resourceVersion": "1.0",
   "name": "objDmgText",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMObject",
 }

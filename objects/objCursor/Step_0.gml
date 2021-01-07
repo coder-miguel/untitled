@@ -5,10 +5,27 @@ y = mouse_y;
 gridX = floor(x/GRID_SIZE);
 gridY = floor(y/GRID_SIZE);
 
-if(gridX < 0 || gridY < 0 || gridX >= room_width/GRID_SIZE || gridY >= room_height/GRID_SIZE){
+hoverButton = instance_place(x, y, objButton);
+if(hoverButton != noone){
 	hoverNode = noone;
 }else{
-	hoverNode = map[gridX, gridY];
+	if(gridX < 0 || gridY < 0 || gridX >= room_width/GRID_SIZE || gridY >= room_height/GRID_SIZE){
+		hoverNode = noone;
+	}else{
+		hoverNode = map[gridX, gridY];
+	}
+}
+
+if(mouse_check_button_pressed(mb_right)){
+	if(selected.actor != noone && hoverButton != noone){
+		button_pressed(hoverButton);
+	}
+	if(instance_place(x, y, objButtonConfirm)){
+		selected.actor.state = ACTOR_ACTION_ACT;
+		with(objButtonConfirm){
+			instance_destroy();
+		}
+	}
 }
 // noteObjCursorStep: 30, 41
 // --code start
@@ -29,6 +46,7 @@ if(mouse_check_button_pressed(mb_left)){
 			selected.actor.actions -= 1;
 		}
 		selected.actor = noone;
+		wipe_buttons();
 		wipe_nodes();
 		
 		// --code end
@@ -41,7 +59,7 @@ if(mouse_check_button_pressed(mb_left)){
 		
 		switch(selected.actor.atkType){
 			case ATTACK_TYPE_RANGED:
-				selected.actor.atkTimer = TIME_ATTACK;
+				selected.actor.actTimer = TIME_ATTACK;
 				selected.actor.state = ACTOR_ATTACK_BEGIN;
 				selected.actor.actions -= 1;
 				break;
@@ -49,7 +67,7 @@ if(mouse_check_button_pressed(mb_left)){
 				var tempX = abs(hoverNode.gridX - selected.actor.gridX);
 				var tempY = abs(hoverNode.gridY - selected.actor.gridY);
 				if(tempX <= 1 && tempY <= 1){
-					selected.actor.atkTimer = TIME_ATTACK;
+					selected.actor.actTimer = TIME_ATTACK;
 					selected.actor.state = ACTOR_ATTACK_BEGIN;
 					selected.actor.actions -= 1;
 				}else{
@@ -70,6 +88,7 @@ if(mouse_check_button_pressed(mb_left)){
 				break;
 		}
 		selected.actor = noone;
+		wipe_buttons();
 		wipe_nodes();
 	}
 }

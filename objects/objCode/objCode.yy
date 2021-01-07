@@ -31,6 +31,8 @@
   },
   "resourceVersion": "1.0",
   "name": "objCode",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMObject",
 }

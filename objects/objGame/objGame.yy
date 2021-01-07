@@ -41,6 +41,8 @@
   },
   "resourceVersion": "1.0",
   "name": "objGame",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMObject",
 }

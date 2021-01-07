@@ -48,6 +48,9 @@
   },
   "resourceVersion": "1.0",
   "name": "objNode",
-  "tags": [],
+  "tags": [
+    "core",
+    "node",
+  ],
   "resourceType": "GMObject",
 }

@@ -34,6 +34,9 @@
   },
   "resourceVersion": "1.0",
   "name": "objTerrain",
-  "tags": [],
+  "tags": [
+    "core",
+    "node",
+  ],
   "resourceType": "GMObject",
 }

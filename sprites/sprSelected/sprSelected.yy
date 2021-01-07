@@ -93,6 +93,8 @@
   },
   "resourceVersion": "1.0",
   "name": "sprSelected",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMSprite",
 }

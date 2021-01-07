@@ -1,6 +1,7 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-// reset data of ALL nodes
+
+// @descriptionn Reset Data of ALL Nodes
 function wipe_nodes(){
 	with(objNode){
 		moveNode = false;
@@ -10,6 +11,7 @@ function wipe_nodes(){
 		color = c_white;
 	}
 }
+
 // TODO:
 // --Replace the 2-action system
 /// @description Color nodes based on remaining movement and action points
@@ -27,6 +29,7 @@ function color_move_node(node, move, actions){
 		node.color = c_yellow;
 	}
 }
+
 /// @description Pathfinding
 // @arg start Origin node
 // @arg move Movement range
@@ -132,8 +135,14 @@ function movement_range(start, move, actions){
 	start.color = c_white;
 	
 	ds_list_destroy(closed);
-	
+	button_create(start.occupant);
 }
+
+/// @description Populate Actor's Path From Actor to a Node
+// @param actor Actor whose path to update
+// @param node Node to trace back to Actor
+// This function depends on a call to movement_range in order
+// to ensure the nodes all have parents to trace back to the actor
 function actor_path_create(actor, node){
 	var current = node;
 		
@@ -163,6 +172,11 @@ function actor_path_create(actor, node){
 	ds_priority_destroy(path);	
 }
 
+/// @description Initiates conditions for actor to begin their path
+// @param actor Actor whose path to update
+// @param endstate The state of the actor to assume after completing it's path
+// This function depends on a call to actor_path_create in order
+// to ensure the path exists
 function actor_path_init(actor, endstate){
 	
 	var rawX = path_get_point_x(actor.path, path_get_number(actor.path) - 1);

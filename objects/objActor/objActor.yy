@@ -45,6 +45,8 @@
   },
   "resourceVersion": "1.0",
   "name": "objActor",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMObject",
 }

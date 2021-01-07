@@ -7,8 +7,8 @@ switch(state){
 		state = ACTOR_MOVING;
 		break;
 	case ACTOR_ATTACK_BEGIN:
-		atkTimer -= 1;
-		if(atkTimer <= 0){
+		actTimer -= 1;
+		if(actTimer <= 0){
 			state = ACTOR_ATTACKING;
 		}
 		break;
@@ -112,18 +112,45 @@ switch(state){
 				}
 				break;
 		}
-		atkTimer = 10;
+		actTimer = 10;
 		state = ACTOR_ATTACK_END;
 		break;
 	case ACTOR_ATTACK_END:
-		atkTimer -= 1;
-		if(atkTimer <= 0){
+		actTimer -= 1;
+		if(actTimer <= 0){
 			if(actions > 0){
 				game_cursor.selected.actor = id;
 				movement_range(map[gridX, gridY], move, actions);
 			}else{
 				game.turnActor = noone;
 			}
+			state = ACTOR_IDLE;
+		}
+		break;
+	case ACTOR_ACTION_BEGIN:
+		break;
+	case ACTOR_ACTION_ACT:
+		actor_perform(id, actReadied);
+		wipe_nodes();
+		break;
+	case ACTOR_ACTION_END:
+		actTimer -= 1;
+		if(actTimer <= 0){
+			state = ACTOR_IDLE;
+			if(actions > 0){
+				movement_range(map[gridX, gridY], move, actions);
+			}else{
+				game_cursor.selected.actor = noone;
+				game.turnActor = noone;
+				state = ACTOR_IDLE;
+			}
+		}
+		break;
+	case ACTOR_TURN_END:
+		actTimer -= 1;
+		if(actTimer <= 0){
+			game_cursor.selected.actor = noone;
+			game.turnActor = noone;
 			state = ACTOR_IDLE;
 		}
 		break;

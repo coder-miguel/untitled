@@ -85,6 +85,8 @@
   },
   "resourceVersion": "1.0",
   "name": "sprBiff",
-  "tags": [],
+  "tags": [
+    "gfx",
+  ],
   "resourceType": "GMSprite",
 }

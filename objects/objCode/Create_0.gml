@@ -3,19 +3,25 @@
 // Global error
 //#macro STATE_ERROR "error"
 // Game States
-#macro GAME_INITIALIZING "initializing"
-#macro GAME_ROLL_INIT "roll initiative"
-#macro GAME_READY "ready"
+#macro GAME_INITIALIZING "game initializing"
+#macro GAME_ROLL_INIT "game roll initiative"
+#macro GAME_READY "game ready"
 //#macro GAME_ERROR "game error"
 // Actor States
-#macro ACTOR_IDLE "idle"
-#macro ACTOR_PATH_BEGIN "begin path"
-#macro ACTOR_MOVING "moving"
-#macro ACTOR_ATTACK_BEGIN "begin attack"
-#macro ACTOR_ATTACKING "attack"
-#macro ACTOR_ATTACK_END "end attack"
-#macro ACTOR_READY "ready"
+#macro ACTOR_IDLE "actor idle"
+#macro ACTOR_PATH_BEGIN "actor begin path"
+#macro ACTOR_MOVING "actor moving"
+#macro ACTOR_ATTACK_BEGIN "actor begin attack"
+#macro ACTOR_ATTACKING "actor attack"
+#macro ACTOR_ATTACK_END "actor end attack"
+#macro ACTOR_ACTION_BEGIN "actor begin action"
+#macro ACTOR_ACTION_ACT "actor act action"
+#macro ACTOR_ACTION_END "actor end action"
+#macro ACTOR_TURN_END "actor end turn"
+//#macro ACTOR_READY "ready"
 //#macro ACTOR_ERROR "actor error"
+// Actions
+#macro ACT_END_TURN "end turn"
 // Terrain Types
 #macro TER_WALL "wall"
 #macro TER_RUBBLE "rubble"
@@ -40,13 +46,10 @@
 // Timing
 #macro TIME_ATTACK 10
 
-// Notes:
-// Object Depth
-// Cursor         -4
-// Font/Particals -3
-// Projectiles    -2
-// Other          -1
-#macro DEPTH_CURSOR     -5
+// Layering
+#macro DEPTH_CURSOR     -6
+#macro DEPTH_BUTTON     -5
 #macro DEPTH_FONT       -4
 #macro DEPTH_PARTICAL   -3
-#macro DEPTH_PROJECTILE -2
+#macro DEPTH_PROJECTILE -3
+#macro DEPTH_SELECTOR   -2

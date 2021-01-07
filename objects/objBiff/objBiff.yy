@@ -34,6 +34,9 @@
   },
   "resourceVersion": "1.0",
   "name": "objBiff",
-  "tags": [],
+  "tags": [
+    "core",
+    "gfx",
+  ],
   "resourceType": "GMObject",
 }

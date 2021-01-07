@@ -32,7 +32,6 @@ hitBonus = profMod + strMod;
 atkType = ATTACK_TYPE_MELEE;
 //optional atkRange if atkType = ATTACK_TYPE_RANGED
 atkTarget = noone;
-atkTimer = 0;
 
 // damage variables
 dmgDie = 4;
@@ -42,17 +41,22 @@ dmgType = DAMAGE_TYPE_PIERCING;
 // defense variables
 AC = 10 + dexMod;
 
-// move and act variables
-// move = 6
-// actions = 2
-canAct = false;
-
 // initiative variables
 initiative = dexMod;
 // initRoll = 0; <-- do we need this? maybe
 
-//skills
+// skills (passive?)
 skills = ds_map_create();
+
+// action variables
+actTimer = 0;
+actReadied = "error";
+actList = ds_list_create();
+ds_list_add(actList, ACT_END_TURN);
+// move and act variables
+// move = 6
+// actions = 2
+canAct = false;
 
 // --DnD Traits
 

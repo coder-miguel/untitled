@@ -1,5 +1,5 @@
 // if cursor is hovering over a different node than actor
-if(game_cursor.selected.actor == id){
+if(game_cursor.selected.actor == id && game_cursor.hoverNode != noone){
 	
 	if(game_cursor.hoverNode != noone){
 		var halfGrid = floor(GRID_SIZE / 2);

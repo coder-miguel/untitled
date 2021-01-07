@@ -152,6 +152,8 @@
   },
   "resourceVersion": "1.0",
   "name": "sprNode",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMSprite",
 }

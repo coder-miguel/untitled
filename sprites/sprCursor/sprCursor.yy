@@ -85,6 +85,8 @@
   },
   "resourceVersion": "1.0",
   "name": "sprCursor",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMSprite",
 }

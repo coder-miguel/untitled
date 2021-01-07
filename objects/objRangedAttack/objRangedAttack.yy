@@ -29,6 +29,8 @@
   },
   "resourceVersion": "1.0",
   "name": "objRangedAttack",
-  "tags": [],
+  "tags": [
+    "core",
+  ],
   "resourceType": "GMObject",
 }

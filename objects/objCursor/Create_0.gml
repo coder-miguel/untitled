@@ -1,3 +1,3 @@
 /// @description Initialize
 
-selected = instance_create_layer(0, 0, "Instances_Lower", objSelected);
+selected = instance_create_depth(0, 0, DEPTH_SELECTOR, objSelector);
