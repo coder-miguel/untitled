@@ -1,7 +1,7 @@
 // if cursor is hovering over a different node than actor
-if(game_cursor.selected.actor == id && game_cursor.hoverNode != noone){
+if(game_cursor.selected.actor == id && game_cursor.hoverNode){
 	
-	if(game_cursor.hoverNode != noone){
+	if(game_cursor.hoverNode){
 		var halfGrid = floor(GRID_SIZE / 2);
 		var tempNode = game_cursor.hoverNode;
 		var current;
@@ -9,7 +9,7 @@ if(game_cursor.selected.actor == id && game_cursor.hoverNode != noone){
 		if(tempNode.moveNode){
 			current = tempNode;
 			// step through every node in the chain until we reach the actor node
-			while(current.parent != noone){
+			while(current.parent){
 				draw_line_width_color(current.x + halfGrid, current.y + halfGrid,
 				current.parent.x + halfGrid, current.parent.y + halfGrid, 4, c_lime, c_lime);
 				
@@ -44,7 +44,7 @@ if(game_cursor.selected.actor == id && game_cursor.hoverNode != noone){
 						}
 						draw_line_width_color(tempNode.x + halfGrid, tempNode.y + halfGrid,
 						current.x + halfGrid, current.y + halfGrid, 4, c_purple, c_purple);
-						while(current.parent != noone){
+						while(current.parent){
 							draw_line_width_color(current.x + halfGrid, current.y + halfGrid,
 							current.parent.x + halfGrid, current.parent.y + halfGrid, 4, c_purple, c_purple);
 							current = current.parent;

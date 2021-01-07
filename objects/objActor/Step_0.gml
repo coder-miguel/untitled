@@ -22,7 +22,7 @@ switch(state){
 			var tempNode = map[atkTarget.gridX, atkTarget.gridY];
 			for(var ii = 0; ii < ds_list_size(tempNode.neighbors); ii++){
 				var current = ds_list_find_value(tempNode.neighbors, ii);
-				if(current.occupant != noone && current.occupant.army != atkTarget.army){
+				if(current.occupant && current.occupant.army != atkTarget.army){
 					sneakDmg = ds_map_find_value(skills, "sneak attack");
 				}
 			}

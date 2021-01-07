@@ -1,3 +1,3 @@
-if(game_cursor.hoverNode != noone){
+if(game_cursor.hoverNode){
 	draw_self();
 }

@@ -1,8 +1,22 @@
 /// @description Draw Cursor
-
+if(hoverButton && buttonTimer > 15){
+	var tempTitle = hoverButton.title;
+	var tempText = hoverButton.text;
+	draw_set_font(fntCrit);
+	var heightY = string_height(tempTitle) + string_height(tempText);
+	draw_set_color(c_black);
+	draw_rectangle(x + 20, y - heightY, x + 20 + string_width(tempTitle), y - heightY + string_height(tempTitle), false);
+	draw_set_color(c_white);
+	draw_text(x + 20, y - heightY, tempTitle);
+	draw_set_font(fntDefault);
+	draw_set_color(c_black);
+	draw_rectangle(x + 20, y - string_height(tempText), x + 20 + string_width(tempText), y, false);
+	draw_set_color(c_white);
+	draw_text(x + 20, y - string_height(tempText), tempText);
+}
 draw_self();
 
-if(selected.actor != noone){
+if(selected.actor){
 	var halfGrid = floor(GRID_SIZE / 2);
 	var tempText;
 	tempText = selected.actor.name + " the " + selected.actor.race + " " + selected.actor.class;

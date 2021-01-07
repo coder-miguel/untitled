@@ -5,10 +5,23 @@ y = mouse_y;
 gridX = floor(x/GRID_SIZE);
 gridY = floor(y/GRID_SIZE);
 
+with(objButtonConfirm){
+	if(keyboard_check_pressed(vk_enter) || keyboard_check_pressed(ord(hotKey))){
+		other.selected.actor.state = ACTOR_ACTION_ACT;
+		instance_destroy();
+	}
+}
+
 hoverButton = instance_place(x, y, objButton);
-if(hoverButton != noone){
+if(hoverButton){
 	hoverNode = noone;
+	if(instance_place(x, y, objButton) == hoverButton){
+		buttonTimer += 1;
+	}else{
+		buttonTimer = 0;
+	}
 }else{
+	buttonTimer = 0;
 	if(gridX < 0 || gridY < 0 || gridX >= room_width/GRID_SIZE || gridY >= room_height/GRID_SIZE){
 		hoverNode = noone;
 	}else{
@@ -16,8 +29,37 @@ if(hoverButton != noone){
 	}
 }
 
-if(mouse_check_button_pressed(mb_right)){
-	if(selected.actor != noone && hoverButton != noone){
+with(objButton){
+	if(keyboard_check_pressed(ord(hotKey))){
+		button_pressed(id);
+	}
+}
+if(keyboard_check_pressed(vk_escape)){
+	if(selected.actor.state == ACTOR_ACTION_BEGIN){
+		selected.actor.state = ACTOR_IDLE;
+		with(objButtonConfirm){
+			instance_destroy();
+		}
+	}
+	wipe_nodes();
+	movement_range(map[selected.actor.gridX, selected.actor.gridY], selected.actor.move, selected.actor.actions);
+	
+	if(selected.actor.canAct){
+		switch(selected.actor.atkType){
+			case ATTACK_TYPE_RANGED:
+				attack_range_ranged(selected.actor);
+				break;
+			case ATTACK_TYPE_MELEE:
+				attack_range_melee(selected.actor);
+				break;
+		}
+	}
+}
+// noteObjCursorStep: 30, 41
+// --code start
+// --code end
+if(mouse_check_button_pressed(mb_left)){
+	if(selected.actor && hoverButton){
 		button_pressed(hoverButton);
 	}
 	if(instance_place(x, y, objButtonConfirm)){
@@ -26,12 +68,7 @@ if(mouse_check_button_pressed(mb_right)){
 			instance_destroy();
 		}
 	}
-}
-// noteObjCursorStep: 30, 41
-// --code start
-// --code end
-if(mouse_check_button_pressed(mb_left)){
-	if(selected.actor != noone && hoverNode.moveNode){
+	if(selected.actor && hoverNode && hoverNode.moveNode){
 		// noteObjCursorStep: 1, 29
 		// --code start
 		actor_path_create(selected.actor, hoverNode);
@@ -52,7 +89,7 @@ if(mouse_check_button_pressed(mb_left)){
 		// --code end
 	}
 	
-	if(selected.actor != noone && hoverNode.attackNode){
+	if(selected.actor && hoverNode && hoverNode.attackNode){
 		selected.actor.canAct = false;
 		selected.actor.atkTarget = hoverNode.occupant;
 		

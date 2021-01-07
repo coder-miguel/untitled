@@ -7,7 +7,7 @@ function button_create(actor){
 		ds_list_add(buttons, ds_list_find_value(actor.actList, ii));
 	}
 	
-	var buttonY = room_height - 48;
+	var buttonY = room_height - (GRID_SIZE * 2);
 	var buttonX = room_width/2 - ((ds_list_size(buttons) - 1 * 48));
 	var button;
 	for(var ii = 0; ii < ds_list_size(buttons); ii++){
@@ -15,11 +15,10 @@ function button_create(actor){
 		switch(button){
 			case ACT_END_TURN:
 				with(instance_create_depth(buttonX + (ii * 96), buttonY, DEPTH_BUTTON, objButton)){
+					sprite_index = sprButtonEndTurn;
 					title = ACT_END_TURN;
-					text = "Finished";
+					text = "End your turn";
 					hotKey = "X";
-					x = buttonX + (ii * 96);
-					y = buttonY;
 				}
 			break;
 		}
@@ -40,8 +39,6 @@ function button_pressed(button){
 				title = button.title;
 				text = button.text;
 				hotKey = button.hotKey;
-				x = room_width/2;
-				y = room_height;
 			}
 			wipe_buttons();
 			wipe_nodes();

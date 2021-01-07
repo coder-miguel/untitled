@@ -21,7 +21,7 @@
 //#macro ACTOR_READY "ready"
 //#macro ACTOR_ERROR "actor error"
 // Actions
-#macro ACT_END_TURN "end turn"
+#macro ACT_END_TURN "End Turn"
 // Terrain Types
 #macro TER_WALL "wall"
 #macro TER_RUBBLE "rubble"

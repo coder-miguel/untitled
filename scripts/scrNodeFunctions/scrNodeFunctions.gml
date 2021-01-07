@@ -153,7 +153,7 @@ function actor_path_create(actor, node){
 	ds_priority_add(path, current, current.g);
 		
 	// step through each node, parent to parent until done
-	while(current.parent != noone){
+	while(current.parent){
 		// add parent to node queue
 		ds_priority_add(path, current.parent, current.parent.g);
 		// next node
